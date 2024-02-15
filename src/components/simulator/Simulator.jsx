@@ -56,6 +56,23 @@ const Simulator = () => {
     if (!position.placed) return;
     alert(`Output: ${position.x},${position.y},${position.f}`);
   };
+
+ const renderGrid = () => {
+   let grid = [];
+   for (let row = 4; row >= 0; row--) {
+     for (let col = 0; col < 5; col++) {
+       grid.push(
+         <div className="cell" key={`${row},${col}`}>
+           {position.placed && position.x === col && position.y === row && (
+             <div className="robot"></div>
+           )}
+         </div>
+       );
+     }
+   }
+   return grid;
+ };
+
   return (
     <div className="robot-simulator">
       <h2>Toy Robot Simulator</h2>
@@ -84,6 +101,7 @@ const Simulator = () => {
       <button onClick={() => rotateRobot("LEFT")}>LEFT</button>
       <button onClick={() => rotateRobot("RIGHT")}>RIGHT</button>
       <button onClick={reportPosition}>REPORT</button>
+      <div className="grid">{renderGrid()}</div>
     </div>
   );
 };
